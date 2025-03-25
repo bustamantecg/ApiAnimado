@@ -12,15 +12,27 @@ export const showErrorToast = (message) => {
     theme: "colored",
   });
 };
-
+/*
 export const showSuccessToast = (message) => {
   toast.success(message, {
     position: "top-right",
     autoClose: 5000,
-    hideProgressBar: true,
+    hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
     draggable: true,
     theme: "colored",
+  });
+};
+*/
+export const showSuccessToast = (message) => {
+  toast.success(message, {
+    position: "top-right",
+    autoClose: 3000, // Cierra automáticamente en 3 segundos
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
   });
 };

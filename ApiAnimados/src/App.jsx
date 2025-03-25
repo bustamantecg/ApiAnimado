@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import './index.css'
-import Footer from './components/Footer'
-import NavBar from './components/NavBar'
-import GetApi from './components/GetApi';
+import './index.css';
+import Footer from './components/Footer';
+import NavBar from './components/NavBar';
+
+import Api_Personajes from './components/Api_Personajes';
+import { FavoritosProvider } from './components/context/FavoritosContext';
 
 function App() {
  
@@ -17,7 +19,9 @@ function App() {
     <>
     <div className="min-h-screen flex flex-col bg-base-200">
       <NavBar toggleTheme={toggleTheme}/>  
-      <GetApi />        
+      <FavoritosProvider>
+        <Api_Personajes />
+      </FavoritosProvider>
       <Footer />
      
     </div>  
