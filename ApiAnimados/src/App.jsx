@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import './index.css';
+import { ToastContainer, toast } from "react-toastify"; // No olvides este componente
+import "react-toastify/dist/ReactToastify.css";
+
 import Footer from './components/Footer';
 import NavBar from './components/NavBar';
 
@@ -18,12 +21,13 @@ function App() {
   return (
     <>
     <div className="min-h-screen flex flex-col bg-base-200">
-      <NavBar toggleTheme={toggleTheme}/>  
+    <ToastContainer />
+      
       <FavoritosProvider>
+      <NavBar toggleTheme={toggleTheme}/>  
         <Api_Personajes />
       </FavoritosProvider>
-      <Footer />
-     
+      <Footer />      
     </div>  
     </>
   )

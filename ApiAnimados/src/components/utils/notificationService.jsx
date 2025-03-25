@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 export const showErrorToast = (message) => {
   toast.error(message, {
     position: "top-right",
-    autoClose: 5000,
+    autoClose: 3000,
     hideProgressBar: true,
     closeOnClick: true,
     pauseOnHover: true,
@@ -12,19 +12,7 @@ export const showErrorToast = (message) => {
     theme: "colored",
   });
 };
-/*
-export const showSuccessToast = (message) => {
-  toast.success(message, {
-    position: "top-right",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    theme: "colored",
-  });
-};
-*/
+
 export const showSuccessToast = (message) => {
   toast.success(message, {
     position: "top-right",
@@ -33,6 +21,20 @@ export const showSuccessToast = (message) => {
     closeOnClick: true,
     pauseOnHover: true,
     draggable: true,
+    theme: "colored",
     progress: undefined,
   });
+};
+
+export const showWarningToast = (message) => {
+  toast.warn(message, {
+    position: "top-center",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: false,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",    
+    });
 };

@@ -1,12 +1,9 @@
 import { createContext, useState, useEffect, useContext } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { showErrorToast, showSuccessToast } from '../utils/notificationService';
-
-
+import { showSuccessToast, showWarningToast } from '../utils/notificationService';
 
 // Creamos el contexto
-
 const FavoritosContext = createContext();
 
 export const FavoritosProvider = ({ children }) => {
@@ -30,10 +27,9 @@ export const FavoritosProvider = ({ children }) => {
   const addToFavoritos = (personaje) => {    
     const existe = favoritos.some((p) => p.id === personaje.id);
     if (existe) {
-      showSuccessToast('El personaje ya existe en tu lista de favoritos.'); // por esta linea me da error
+      showWarningToast('El personaje ya existe en tu lista de favoritos.'); // por esta linea me da error
       return; // Evita que se agregue duplicada
     }
-
     // Si no existe, se agrega
     const nuevosFavoritos = [...favoritos, personaje];
     setFavoritos(nuevosFavoritos);
@@ -44,7 +40,8 @@ export const FavoritosProvider = ({ children }) => {
   const removeFavorito = (id) => {
     const nuevosFavoritos = favoritos.filter(favorito => favorito.id !== id);
     setFavoritos(nuevosFavoritos);
-    showSuccessToast("Personaje eliminado correctamente de tu lista de favoritos.");
+    //showSuccessToast("Personaje fue eliminado correctamente de tu lista de favoritos.");
+    alert("Personaje fue eliminado correctamente de tu lista de favoritos.");
   };
 
   //--------------------------------------------

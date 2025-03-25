@@ -1,6 +1,11 @@
 import React from 'react'
+import { useState } from 'react';
 
+import FavoritosModal from './FavoritosModal';
+import { showErrorToast, showSuccessToast } from './utils/notificationService'
 const NavBar = ({ toggleTheme }) => {
+    const [isModalOpen, setModalOpen] = useState(false);
+    
     return (
         <>
             <div className="navbar bg-blue-300 shadow-sm">
@@ -12,7 +17,7 @@ const NavBar = ({ toggleTheme }) => {
                         <ul
                             tabIndex={0}
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                            <li><a>Favoritos</a></li>
+                            <li onClick={() => setModalOpen(true)}><a>Favoritos</a></li>
                             <li>
                                 <a>Consultar</a>
                                 <ul className="p-2">
@@ -57,7 +62,7 @@ const NavBar = ({ toggleTheme }) => {
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
-                        <li><a>Favoritos</a></li>
+                        <li onClick={() => setModalOpen(true)}><a>Favoritos</a></li>
                         <li>
                             <details>
                                 <summary>Personajes</summary>
@@ -73,6 +78,12 @@ const NavBar = ({ toggleTheme }) => {
                 <div className="navbar-end">
                     <a className="btn btn-ghost text-xl">daisyUI</a>
                 </div>
+
+                {isModalOpen && (                   
+                    < FavoritosModal 
+                        closeModal={() => setModalOpen(false)}                        
+                    />
+                )}
             </div>
         </>
     )

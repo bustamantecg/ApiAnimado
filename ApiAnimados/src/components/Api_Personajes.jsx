@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-import { ToastContainer } from "react-toastify"; // No olvides este componente
-import "react-toastify/dist/ReactToastify.css";
 import { showErrorToast, showSuccessToast } from '../components/utils/notificationService'
-
 import { useFavoritos } from "./context/FavoritosContext";
-
 
 const Api_Personajes = () => {
     const [personajes, setpersonajes] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    // Extraer la función addFavorito del contexto
+    // Leeer la función addFavorito del contexto
     const { addToFavoritos } = useFavoritos();
 
     const fetchData = async () => {
@@ -36,7 +32,7 @@ const Api_Personajes = () => {
         <div>
             <div className="overflow-x-auto">
                 {/* Componente ToastContainer para mostrar notificaciones */}
-                <ToastContainer />
+                
                 {loading && <span className="loading loading-spinner text-primary"></span>}
                 <table className="table">
                     {/* Cabecera de la tabla */}
