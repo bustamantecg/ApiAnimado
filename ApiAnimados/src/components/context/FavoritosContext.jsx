@@ -27,7 +27,7 @@ export const FavoritosProvider = ({ children }) => {
   const addToFavoritos = (personaje) => {    
     const existe = favoritos.some((p) => p.id === personaje.id);
     if (existe) {
-      showWarningToast('El personaje ya existe en tu lista de favoritos.'); // por esta linea me da error
+      showWarningToast('El personaje ya Existe en tu lista de favoritos.'); 
       return; // Evita que se agregue duplicada
     }
     // Si no existe, se agrega
@@ -39,16 +39,17 @@ export const FavoritosProvider = ({ children }) => {
   //--------------------------------------------  
   const removeFavorito = (id) => {
     const nuevosFavoritos = favoritos.filter(favorito => favorito.id !== id);
-    setFavoritos(nuevosFavoritos);
-    //showSuccessToast("Personaje fue eliminado correctamente de tu lista de favoritos.");
-    alert("Personaje fue eliminado correctamente de tu lista de favoritos.");
+    setFavoritos(nuevosFavoritos);    
+    showSuccessToast("Personaje fue eliminado correctamente de tu lista de favoritos.");
   };
 
   //--------------------------------------------
   const clearFavoritos = () => {
     setFavoritos([]);
-    showSuccessToast("Todos los personajes favoritos han sido eliminados.");
+    showSuccessToast("Todos Tus Personajes favoritos han sido eliminados.");
   };
+
+  
 
   //--------------------------------------------
   return (
