@@ -11,7 +11,7 @@ const Api_Personajes = () => {
 
     const { addToFavoritos } = useFavoritos();
 
-    // Función para obtener todos los personajes
+    // Cargar todos los personajes
     const loadCharacters = async () => {
         setLoading(true);
         try {
@@ -25,13 +25,13 @@ const Api_Personajes = () => {
         }
     };
 
-    // Función para buscar por nombre
-    const handleSearch = async () => {
+    // Búsqueda por nombre
+    const handleSearch = async (event) => {
+        event.preventDefault();
         if (!searchTerm) {
             loadCharacters();
             return;
         }
-
         setLoading(true);
         try {
             const data = await searchCharacterByName(searchTerm);
@@ -43,19 +43,20 @@ const Api_Personajes = () => {
         }
     };
 
-    // Función para buscar por ID
-    const handleSearchId = async () => {        
+    // Búsqueda por ID
+    const handleSearchId = async (event) => {
+        event.preventDefault();
         if (!searchTermId) {
             loadCharacters();
             return;
         }
-    
+
         setLoading(true);
         try {
             const data = await searchCharacterById(searchTermId);
-            setPersonajes(data); // data ya es un array, así que no necesita más cambios
+            setPersonajes(data);
         } catch (error) {
-            showErrorToast("Id no encontrado");
+            showErrorToast("ID no encontrado");
         } finally {
             setLoading(false);
         }
@@ -67,37 +68,46 @@ const Api_Personajes = () => {
 
     return (
         <div>
-            <div className="flex flex-wrap justify-center items-center gap-4 mb-4">
-<div className="flex flex-wrap gap-4 mb-4 bg-amber-100">
-        {/* Búsqueda por ID */}
-        <div className="flex gap-2">
-        <input
-            type="number"
-            placeholder="Buscar ID..."
-            value={searchTermId}
-            onChange={(e) => setSearchTermId(e.target.value)}
-            className="input input-bordered input-primary"
-        />
-        <button className="btn btn-primary" onClick={handleSearchId} title="Buscar por ID">
-            Buscar
-        </button>
-    </div>
-    {/* Búsqueda por Nombre */}
-    <div className="flex gap-2">
-        <input
-            type="text"
-            placeholder="Buscar personaje..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="input input-bordered input-info"
-        />
-        <button className="btn btn-primary" onClick={handleSearch} title="Buscar por Nombre">
-            Buscar
-        </button>
-    </div>
-    </div>
+            <div className="flex flex-wrap justify-center items-center gap-4 mb-4 mt-3">
+                <div className="flex flex-wrap gap-4 mb-4 bg-amber-100 py-2">
+                    {/* Formulario de búsqueda por ID */}
+                    <form onSubmit={handleSearchId} className="flex gap-2 mx-10">
+                        <label className="floating-label">
+                            <input
+                                type="number"
+                                placeholder="Buscar ID..."
+                                value={searchTermId}
+                                onChange={(e) => setSearchTermId(e.target.value)}
+                                className="input input-bordered input-primary input-md"
+                                min= '1'
+                                max="9999999"                                
+                            />
+                            <span>Buscar por ID </span>
+                        </label>
+                        <button type="submit" className="btn btn-primary" title="Buscar por ID">
+                            Buscar
+                        </button>
+                    </form>
 
-</div>
+                    {/* Formulario de búsqueda por Nombre */}
+                    <form onSubmit={handleSearch} className="flex gap-2 mr-10">
+                        <label className="floating-label">
+                            <input
+                                type="text"
+                                placeholder="Buscar Nombre..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                className="input input-bordered input-info"
+                                maxLength={25}
+                            />
+                            <span>Buscar por Nombre </span>
+                        </label>
+                        <button type="submit" className="btn btn-primary" title="Buscar por Nombre">
+                            Buscar
+                        </button>
+                    </form>
+                </div>
+            </div>
 
             <div className="overflow-x-auto">
                 {loading && <span className="loading loading-spinner text-primary"></span>}
@@ -117,7 +127,7 @@ const Api_Personajes = () => {
                     </thead>
                     <tbody>
                         {personajes.map((personaje, index) => (
-                            <tr key={personaje.id ? personaje.id : `personaje-${index}`}> 
+                            <tr key={personaje.id ? personaje.id : `personaje-${index}`}>
                                 <td>{personaje.id}</td>
                                 <td>{personaje.name}</td>
                                 <td>{personaje.species}</td>

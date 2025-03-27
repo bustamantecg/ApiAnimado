@@ -5,39 +5,39 @@ const FavoritosModal = ({ closeModal }) => {
     const { favoritos, clearFavoritos, removeFavorito } = useFavoritos();
 
     return (
-        <div className="fixed inset-0 bg-amber-100 bg-opacity-50 flex justify-center items-center z-50">
-            <div className="bg-amber-600 p-6 rounded-lg shadow-lg w-96 max-h-[85vh] flex flex-col">
-                <h2 className="text-2xl font-bold mb-4 text-blue-500 text-center">Mis Personajes Favoritos {favoritos.length }</h2>
+        <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50">
+            <div className="bg-gradient-to-b from-blue-700 to-purple-800 p-6 rounded-2xl shadow-2xl w-96 max-h-[85vh] flex flex-col border border-gray-300">
+                <h2 className="text-2xl font-bold mb-4 text-white text-center">
+                    Mis Personajes Favoritos <span className="text-yellow-300">({favoritos.length})</span>
+                </h2>
 
-                <div className="overflow-y-auto max-h-[70vh] p-2">
+                <div className="overflow-y-auto max-h-[60vh] p-2 space-y-3">
                     {favoritos.length === 0 ? (
-                        <p className="text-gray-600 text-center">Favoritos está vacío.</p>
+                        <p className="text-gray-300 text-center">No tienes personajes favoritos.</p>
                     ) : (
                         favoritos.map((item) => (
-                            <div key={item.id} className="card card-side bg-base-100 shadow-sm mb-3">
-                                <figure className="px-3 pt-3">
-                                    <img
-                                        src={item.image}
-                                        alt={item.name}
-                                        className="rounded-xl w-20 h-20"
-                                    />
-                                </figure>
-                                <div className="card-body items-center text-center p-2">
+                            <div key={item.id} className="flex items-center bg-gray-900 bg-opacity-50 rounded-lg shadow-md p-3">
+                                <img
+                                    src={item.image}
+                                    alt={item.name}
+                                    className="w-16 h-16 rounded-full border-2 border-yellow-300"
+                                />
+                                <div className="ml-3 flex-1 text-white">
                                     <h2 className="text-sm font-semibold">{item.name}</h2>
-                                    <p className="text-xs">Sexo: {item.gender} - {item.species}</p>
-                                    <p className="text-xs">{item.status}</p>
-                                    <button className="btn btn-sm btn-error" onClick={() => removeFavorito(item.id)}>❌</button>
+                                    <p className="text-xs text-gray-300">Sexo: {item.gender} - {item.species}</p>
+                                    <p className="text-xs text-gray-400">{item.status}</p>
                                 </div>
+                                <button className="text-red-400 hover:text-red-600 text-lg" onClick={() => removeFavorito(item.id)}>❌</button>
                             </div>
                         ))
                     )}
                 </div>
 
                 <div className="mt-4 flex flex-col gap-2">
-                    <button className="btn btn-sm btn-secondary" onClick={clearFavoritos}>
+                    <button className="btn bg-red-600 hover:bg-red-700 text-white font-semibold py-2 rounded-lg" onClick={clearFavoritos}>
                         Vaciar Favoritos
                     </button>
-                    <button className="btn btn-sm btn-primary" onClick={closeModal}>
+                    <button className="btn bg-green-500 hover:bg-green-600 text-white font-semibold py-2 rounded-lg" onClick={closeModal}>
                         Cerrar
                     </button>
                 </div>

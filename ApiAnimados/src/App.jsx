@@ -4,9 +4,9 @@ import { ToastContainer, toast } from "react-toastify"; // No olvides este compo
 import "react-toastify/dist/ReactToastify.css";
 
 import Footer from './components/Footer';
-import NavBar from './components/NavBar';
+import NavBar_2 from './components/NavBar_2';
 
-import Api_Personajes from './components/Api_Personajes';
+import ApiPersonajes from './components/ApiPersonajes';
 import { FavoritosProvider } from './components/context/FavoritosContext';
 
 function App() {
@@ -21,11 +21,10 @@ function App() {
   return (
     <>
     <div className="min-h-screen flex flex-col bg-base-200">
-    <ToastContainer />
-      
+    <ToastContainer />      
       <FavoritosProvider>
-      <NavBar toggleTheme={toggleTheme}/>  
-        <Api_Personajes />
+        <NavBar_2 toggleTheme={toggleTheme} />        
+        <ApiPersonajes />
       </FavoritosProvider>
       <Footer />      
     </div>  
